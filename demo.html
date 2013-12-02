@@ -1,0 +1,84 @@
+
+<!DOCTYPE html> 
+<html> 
+  <head> 
+       <meta charset="utf-8"> 
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="apple-mobile-web-app-capable" content="yes" />
+       <title>SLD 2013 Demo</title> 
+       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+       <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script> 
+        <!-- Browser Detection Features -->
+       <script type="text/javascript" src="js/modernizr-2.0.6/modernizr.min.js"></script>
+       <script type="text/javascript" src="js/jqm.autoComplete-1.5.2-min.js"></script>
+       <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+       <script type="text/javascript" src="js/soundmanager2.js"></script>
+       <style>
+          #ui-icon-geo {
+            background-image: url("img/geo_arch.png");
+            background-size: 24px 24px;
+          }
+       </style>
+
+       <script type="text/javascript" charset="utf-8">
+         soundManager.setup({
+             preferFlash: false,
+             onready: function() {
+               soundManager.createSound({ id:'beep', url: 'sounds/beep.mp3' });
+             },
+             ontimeout: function() {
+               // Uh-oh. SWF missing, Flash blocked or other issue
+             }
+         });
+         function playBeep(){
+           soundManager.play('beep')
+         }
+         function play(sound_id){
+           soundManager.play(sound_id)
+         }
+
+       </script>
+ </head> 
+
+ <body> 
+    <div data-role="page" id="mainPage"> 
+        <div data-role="header"> 
+          <a href="index.html" data-icon="search">Buscar</a>
+          <h1>Mi Bus Digital</h1> 
+          <a href="index.html" data-iconpos="notext" id="ui-icon-geo"></a>
+        </div> 
+        <div data-role="content" class="ui-content" role="main">  
+             <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+              <a href="index.html" data-role="button" data-theme="a" data-icon="search">Localizar</a> 
+              <!--</div> -->
+        </div>
+              <p>
+                <input type="search" id="searchBox" placeholder="Donde voy...">
+                <ul id="suggestions" data-role="listview" data-inset="true"></ul>
+              </p>
+        <!--<div data-role="footer">-->
+         <!--<h4>San Luis Digital 2013 </h4>-->
+        <!--</div> -->
+    </body> 
+    </html>
+       <script type="text/javascript" charset="utf-8">
+          var iconSolBus = 'img/FFFF00.png';
+          var markers = [], checkPoints = [];
+          var checkPoint,map, mapOptions;
+          var url_corredores = "http://api.ga.ulp.edu.ar/json/CorredorColeUrbana";
+          
+          
+$("#mainPage").bind("pageshow", function(e) {
+              var data = ['C', 'Clojure', 'Java', 'Scala', 'Objective-C', 'C++', 'PHP', 'C#', '(Visual) Basic', 'Python', 'Perl', 'JavaScript', 'Ruby', 'Visual Basic .NET', 'Transact-SQL', 'Lisp', 'Pascal', 'Bash', 'PL/SQL', 'Delphi/Object Pascal', 'Ada', 'MATLAB'];
+              $("#searchBox").autocomplete({
+                target: $('#suggestions'),
+                source: data,
+                link: 'target.html?term=',
+                minLength: 1,
+                matchFromStart: false
+              });
+              });
+
+          //addCurrentPosition();
+        
+       </script>

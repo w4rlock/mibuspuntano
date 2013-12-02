@@ -1,0 +1,12 @@
+paradas mal puestas.
+faltan paradas ej. universidad
+
+optimizacion 
+descartar colectivos parados en la base o apagar gps
+
+determinar
+colectivo cerca se esta viniendo o se esta alejando
+  solucion rapida y generica
+  al tocar un colectivo ver en un tooltip cuanto tiempo demora de esta forma puedo determinar el proximo colectivo
+  a que tiempo se encuentra
+

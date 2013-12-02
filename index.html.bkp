@@ -1,0 +1,206 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+       <meta charset="utf-8"> 
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <meta name="apple-mobile-web-app-capable" content="yes" />
+       <title>SLD 2013 Demo</title> 
+       <link href='img/favicon.png' rel='shortcut icon' />
+       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+       <link rel="stylesheet" href="css/er_ui.css" />
+       <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+       <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+       <!-- Maps Libs -->
+       <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;libraries=places"></script>
+       <script type="text/javascript" src="js/ui/jquery.ui.map.js"></script>
+       <script type="text/javascript" src="js/ui/jquery.ui.map.overlays.js"></script>
+       <script type="text/javascript" src="js/ui/jquery.ui.map.services.js"></script>
+       <script type="text/javascript" src="js/ui/jquery.ui.map.extensions.js"></script>
+       <!-- ELEMENTOS FLOTANTE -->
+       <!--<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker.js"></script>-->
+
+        <!-- Browser Detection Features -->
+       <script type="text/javascript" src="js/modernizr-2.0.6/modernizr.min.js"></script>
+
+       <script type="text/javascript" src="js/jqm.autoComplete-1.5.2-min.js"></script>
+       <script type="text/javascript" src="js/soundmanager2-nodebug.js"></script>
+       <script type="text/javascript" src="js/er_functions.js"></script>
+       <script type="text/javascript" src="js/er_prototypes.js"></script>
+       <script type="text/javascript" charset="utf-8">
+         soundManager.setup({
+             preferFlash: false,
+             onready: function() {
+               soundManager.createSound({ id:'beep', url: 'sounds/beep.mp3' });
+             },
+             ontimeout: function() {
+               // Uh-oh. SWF missing, Flash blocked or other issue
+             }
+         });
+         function playBeep(){
+           soundManager.play('beep')
+         }
+         function playSound(sound_id){
+           soundManager.play(sound_id)
+         }
+
+       </script>
+ </head> 
+ <body> 
+    <div data-role="page" id="mainPage" class="ui-responsive-panel"> 
+        <div data-role="header"> 
+          <a id="btnMenu" href="#nav-panel" data-transition="slide" data-icon="bars" data-iconpos="notext">Menu</a>
+          <h1>Caminos Libres</h1> 
+          <a id="btnTopSearch" data-icon="search" data-theme="a" data-iconpos="notext">Buscar</a>
+        </div> 
+        <div data-role="content" class="ui-content" role="main">  
+             <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+              <div id="divSearchCorredores" style="display: none">
+                 <div data-role="navbar" class="nav-glyphish">
+                    <ul>
+                        <li><a id="btn_road" href="#" data-theme="a" data-icon="custom" class="ui-btn-active" data-iconpos="">Corredor</a></li>
+                        <li><a id="btn_bus" href="#" data-theme="a" data-icon="custom" data-iconpos="notext">Transporte</a></li>
+                        <li><a id="btn_history" href="#listHistory" data-theme="a" data-icon="custom" data-iconpos="notext">Historial</a></li>
+                    </ul>
+                  </div>
+                  <input data-theme="b" type="search" id="searchBox" placeholder="Donde vas...">
+                  <ul id="suggestions" data-role="listview" data-theme="c" data-inset="true"></ul>
+              </div>
+              <div id="map_canvas" style="height: 500px; position: relative; background-color: rgb(229, 227, 223); 
+                      overflow: hidden; -webkit-transform: translateZ(0);">
+              </div>
+              <!--<p>-->
+                <!--<label for="from" class="ui-input-text">Desde</label>-->
+                <!--<input id="from" class="ui-bar-c ui-input-text ui-body-c ui-corner-all ui-shadow-inset" type="text" value="">-->
+              <!--</p>-->
+              <!--<p>-->
+                <!--<label for="to" class="ui-input-text">Hasta</label>-->
+                <!--<input id="to" class="ui-bar-c ui-input-text ui-body-c ui-corner-all ui-shadow-inset" type="text" value="">-->
+              <!--</p>-->
+              <!--<a href="index.html" data-role="button" data-theme="a" data-icon="search">Iniciar Recorrido</a> -->
+              <!--<ul id="listMarksSounds" data-role="listview" data-split-icon="delete" data-theme="a" data-split-theme="f" data-inset="true">-->
+              <!--<li>-->
+                <!--<a href="#">-->
+                <!--<h2>Borrar Todos</h2>-->
+                <!--<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>-->
+              <!--</li>-->
+              </ul>
+        </div>
+
+        <!-- FOOTER --> 
+        <div data-role="footer" class="ui-bar" data-position="fixed"> 
+          <h4>San Luis Digital 2013 </h4> 
+        </div>
+
+        <div id="directions-panel" data-role="panel" data-position="right" data-position-fixed="false" data-display="overlay" class="nav-search" data-theme="b">
+        </div>
+        <div id="nav-panel" data-role="panel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0"
+          data-position="left" data-position-fixed="false" data-display="overlay" class="nav-search">
+          <!--<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px;" class="nav-search">-->
+            <!--<li data-icon="delete" style="background-color:#111;">-->
+              <!--<a href="#" data-rel="close">Close menu</a>-->
+            <!--</li>-->
+            <!--[><li data-icon="arrow-r" id="submenuAlarmas" data-filtertext="wai-aria voiceover accessibility screen reader"><]-->
+              <!--[><a id="itemAlarmas">Alarmas</a><]-->
+            <!--[></li><]-->
+            <!--<li data-filtertext="wai-aria voiceover accessibility screen reader">-->
+              <!--<a id="btnTopSearch">Buscar</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+            <!--<div id="itemAlarmas" data-role="collapsible">-->
+              <!--<h3>Alarmas</h3>-->
+              <!--<ul id="listMarksSounds" data-role="listview" data-split-icon="delete" data-theme="a" data-split-theme="f" data-inset="true">-->
+            <!--</div>-->
+        <!--</div>-->
+           <!--<ul id="listMarksSounds" data-role="listview" data-split-icon="delete" data-theme="a" data-split-theme="f" data-inset="true">-->
+          <div id="menuAcc" data-role="collapsible-set" data-theme="b" data-iconpos="right"  data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div id="itemAlarmas" data-role="collapsible">
+              <h3>Alarmas</h3>
+              <ul id="listMarksSounds" data-role="listview" data-split-icon="delete" data-theme="a" data-split-theme="f" data-inset="true">
+            </div>
+            <div id="itemBuscar" data-role="collapsible">
+              <h3>Buscar</h3>
+              <p>Collapsible content</p>
+            </div>
+            <div id="itemPrefs" data-role="collapsible">
+              <h3>Preferencias</h3>
+              <p>Collapsible content</p>
+            </div>
+          </div>
+        </div><!-- /panel -->
+        <div id="listHistory" data-role="page">
+         <div data-role="header">
+            <h1>Confirm</h1>
+          </div><!-- /header -->
+           
+          <div data-role="content">
+            Do you want to go to this external link?
+            <a href="http://www.botskool.com"
+               data-role="button"
+               data-inline="true">
+                 Yes
+            </a> 
+            <a href="#"
+               data-role="button"
+               data-inline="true"
+               data-rel="back"
+               data-theme="a">
+                 No
+            </a>
+          </div><!-- /content -->
+            <ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+            </ul>
+        </div>
+    </body> 
+    </html>
+    <script type="text/javascript" charset="utf-8">
+            //$("#mainPage").bind("pageshow", function(e) {
+            function loadAutocomplete(){
+              $.getJSON(URL_CORREDORES, function(data) {
+                $.each(data, function(i, item) {
+                    //HASH MAP
+                    if ($.inArray(item.corredores, corredores) == -1){
+                      corredores.push(item.corredores);
+                    }
+                    if (v_paradas[item.corredores] == undefined){ 
+                      v_paradas[item.corredores] = [item];
+                    }
+                    else {
+                      v_paradas[item.corredores].push(item);
+                    }
+                    $.mobile.loading("hide");
+                });
+
+                if ($("#btn_bus").attr('class').indexOf('ui-btn-active') > -1){
+                  $("#searchBox").autocomplete("update", { source: v_provider_tpte, minLength: 1 });
+                }
+                
+                $("#searchBox").autocomplete({
+                  target: $('#suggestions'),
+                  source: corredores,
+                  minLength: 3,
+                  matchFromStart: false,
+                  loadingHtml : '<li data-icon="none"><a href="#">Buscando...</a></li>', 
+                  callback: function(e) {
+                       var $a = $(e.currentTarget); 
+                       $('#searchBox').val($a.text()); 
+                       $("#searchBox").autocomplete('clear'); 
+                       if ($("#btn_road").attr('class').indexOf('ui-btn-active') > -1){
+                         //addLocalHistory(key_hist_corredores,v_add_storage,$a.text());
+                         filter.corredor = $a.text();
+                         filter.tpte = '';
+                         //si cambio el corredor el transporte anterior no iria a ese lugar
+                         addParadas($a.text());
+                         //if (filtroTransporte()) $("#divSearchCorredores").toggle('slideUp');
+                       }
+                       else{
+                         filter.tpte = $a.text();
+                         filterBus();
+                         if (filter.corredor != '') $("#divSearchCorredores").toggle('slideUp');
+                         addLocalHistoryCorrTpe();
+                      }
+                  }
+                });
+              });
+            }
+            //});
+  </script>

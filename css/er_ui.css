@@ -1,0 +1,159 @@
+ body{
+   height: 100% !important;
+ }
+
+.nav-glyphish .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+.nav-glyphish .ui-btn .ui-icon { 
+  width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; 
+  -moz-box-shadow: none!important; -webkit-box-shadow: none!important; 
+  -webkit-border-radius: none !important; border-radius: none !important;
+}
+
+ #btn_maker .ui-icon { background:  url(../img/btn_markermap.png) 34% 30% no-repeat; background-size: 48px 43px; }
+ #btn_hand .ui-icon { background:  url(../img/btn_hand.png) 80% 80% no-repeat; background-size: 24px 22px; }
+ #btn_bus .ui-icon { background:  url(../img/btn_bus.png) 80% 80% no-repeat; background-size: 24px 22px; }
+ #btn_road .ui-icon { background:  url(../img/btn_road.png) 80% 80% no-repeat; background-size: 24px 16px;  }
+ #btn_history .ui-icon { background:  url(../img/clock_history.png) 80% 80% no-repeat; background-size: 24px 16px;  }
+ /*#divSearchCorredores{*/
+      /*margin-top: -41px;*/
+      /*z-index: 99999;*/
+      /*width: 97%;*/
+      /*position: absolute;*/
+      /*display: block;*/
+      /*left: 15px;*/
+      /*right: 33px;   */
+ /*}*/
+
+ /* F swatch */
+.ui-btn-up-f {
+  border: 1px solid #b11;
+  background: #a00;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  text-shadow: 0 -1px 1px #000;
+  text-decoration: none;
+  background-image: -moz-linear-gradient(top, #e55, #a00);
+  background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #f66), color-stop(1, #a00));
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f66', EndColorStr='#a00')";
+}
+.ui-btn-up-f a.ui-link-inherit {
+  color: #fff;
+}
+.ui-btn-hover-f {
+  border: 1px solid #a00;
+  background: #b11;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 -1px 1px #000;
+  text-decoration: none;
+  background-image: -moz-linear-gradient(top, #f66, #b11);
+  background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #f66), color-stop(1, #b11));
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f66', EndColorStr='#b11')";
+}
+.ui-btn-hover-f a.ui-link-inherit {
+  color: #fff;
+}
+.ui-btn-down-f {
+  border: 1px solid #800;
+  background: #e55;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 -1px 1px #000;
+  background-image: -moz-linear-gradient(top, #800, #e55);
+  background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #800), color-stop(1, #e55));
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#800', EndColorStr='#e55')";
+}
+.ui-btn-down-f a.ui-link-inherit {
+  color: #fff;
+}
+.ui-btn-up-f,
+.ui-btn-hover-f,
+.ui-btn-down-f {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#nav-panel div.ui-panel-inner{
+  padding-top: 45px !important;
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+  
+}
+#nav-panel {
+    border: 1px solid #000;
+    border-right: none;
+    background: rgba(0,0,0,.8);
+    margin: -1px 0;
+    position: absolute !important;
+    width: 42% !important;
+}
+.ui-collapsible-content{
+  padding: 0px !important;
+  
+}
+.nav-search{
+  width: 20% !important;
+}
+
+#listParada .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li{
+  padding: 0px 0px 0px 15px !important;
+}
+#listBus .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li{
+  padding: 0px 0px 0px 15px !important;
+}
+#listMarksSounds .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li{
+  padding: 0px 0px 0px 15px !important;
+}
+.nav-search .ui-btn-up-a {
+  background-image:none;
+  background-color:#333333;
+}
+.nav-search .ui-btn-inner {
+  border-top: 1px solid #888;
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.gmnoprint.gm-style-cc,.gmnoprint .gm-style-cc{
+  display:none !important;
+}
+#map_canvas{
+  height: 100%;
+  position: absolute;
+  left:0px;
+  right:0px;
+  top:0px;
+  background-color: rgb(229, 227, 223);
+  overflow: hidden;
+}
+#alertContent{
+margin-bottom: 30px;
+
+}
+
+/*logo de google en el mapa (google_white2.png) */
+div [style*="z-index: 1000000"]{
+  display: none !important;
+}
+
+div .gmnoprint[style*="margin: 5px; z-index: 10; position: absolute; left: 0px; top: 0px;"]{
+  top: 50px !important;
+}
+#navActionMap{
+  position: absolute;
+  width: 80px;
+  margin: 10px;
+}
+#mainPage{
+  overflow: hidden;
+}
+.ui-popup-container{
+  position: absolute !important;
+  z-index: 9999999 !important;
+}
+#headerapp{
+position: absolute !important;
+width: 100% !important;
+zoom:1.2 !important;
+z-index:9999;
+background:rgba(0,0,0,.83);
+}
